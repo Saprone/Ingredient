@@ -5,7 +5,7 @@ import com.saprone.ingredient.service.IngredientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import java.util.List;
+import reactor.core.publisher.Flux;
 
 @RestController
 public class IngredientController {
@@ -18,7 +18,7 @@ public class IngredientController {
     }
 
     @GetMapping("/ingredients")
-    public List<Ingredient> getAllIngredients() {
+    public Flux<Ingredient> getAllIngredients() {
         return ingredientService.getAllIngredients();
     }
 }
