@@ -1,7 +1,6 @@
 package com.saprone.ingredient.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.saprone.ingredient.model.Ingredient;
 import com.saprone.ingredient.repository.IngredientRepository;
 import jakarta.annotation.PostConstruct;
@@ -44,6 +43,7 @@ public class IngredientService {
                         // Create and save the ingredient
                         Ingredient ingredient = new Ingredient();
                         ingredient.setName(ingredientName);
+
                         ingredientRepository.save(ingredient);
                     }
 
