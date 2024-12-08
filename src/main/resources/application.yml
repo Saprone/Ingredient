@@ -1,3 +1,5 @@
 spring:
   application:
    name: ingredient
+server:
+  port: 8082
