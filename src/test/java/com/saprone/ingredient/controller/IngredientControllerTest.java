@@ -2,6 +2,7 @@ package com.saprone.ingredient.controller;
 
 import com.saprone.ingredient.model.Ingredient;
 import com.saprone.ingredient.service.IngredientService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -18,7 +19,8 @@ class IngredientControllerTest {
     @InjectMocks
     private IngredientController ingredientController;
 
-    public IngredientControllerTest() {
+    @BeforeEach
+    void setUp() {
         MockitoAnnotations.openMocks(this);
     }
 
