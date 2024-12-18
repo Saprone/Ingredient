@@ -1,5 +1,5 @@
 # Use a base image to build the application
-FROM openjdk:17-jdk-slim as builder
+FROM openjdk:21-jdk-slim AS builder
 
 # Set the working directory in the container
 WORKDIR /app
@@ -10,20 +10,23 @@ COPY pom.xml ./
 # Copy the source code
 COPY src ./src
 
+# Install Maven
+RUN apt-get update && apt-get install -y maven
+
 # Build the application
-RUN ./mvnw clean package -DskipTests
+RUN mvn clean package -DskipTests
 
 # Use a new image to run the application
-FROM openjdk:17-jdk-slim
+FROM openjdk:21-jdk-slim
 
 # Set the working directory in the container
 WORKDIR /app
 
 # Copy the built JAR file from the builder stage
-COPY --from=builder /app/target/ingredient-*.jar ingredient-app.jar
+COPY --from=builder /app/target/*.jar ingredient.jar
 
 # Expose the application port
 EXPOSE 8082
 
 # Run the application
-ENTRYPOINT ["java", "-jar", "ingredient-app.jar"]
+ENTRYPOINT ["java", "-jar", "ingredient.jar"]
