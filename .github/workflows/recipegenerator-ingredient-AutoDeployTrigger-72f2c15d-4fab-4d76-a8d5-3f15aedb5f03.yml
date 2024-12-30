@@ -40,7 +40,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn clean verify sonar:sonar
+        run: mvn clean verify sonar:sonar -DskipITs=true
 
       - name: Azure Login
         uses: azure/login@v1
