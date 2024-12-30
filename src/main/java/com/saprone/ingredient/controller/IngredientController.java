@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8085")
+@CrossOrigin(origins = "*")
 public class IngredientController {
 
     private final IngredientService ingredientService;
