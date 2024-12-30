@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureWebTestClient
-class IngredientControllerIntegrationTest {
+class IngredientControllerIT {
 
     @LocalServerPort
     private Integer port;

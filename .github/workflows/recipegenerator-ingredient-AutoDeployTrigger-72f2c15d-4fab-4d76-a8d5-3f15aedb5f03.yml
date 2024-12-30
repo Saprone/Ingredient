@@ -31,7 +31,10 @@ jobs:
           distribution: 'adopt'
 
       - name: Run unit tests with Maven
-        run: mvn test
+        run: mvn test -DskipITs=true
+
+      - name: Run integration tests with Maven
+        run: mvn -Dskip.ut=true verify
 
       - name: Run SonarCloud analysis
         env:
