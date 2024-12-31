@@ -37,13 +37,22 @@ jobs:
         run: mvn -Dskip.ut=true verify
 
       - name: Run SonarCloud analysis
+        uses: sonarsource/sonarqube-scan-action@master -DskipTests
+        with:
+          projectBaseDir: .
+          args: >
+            -Dsonar.organization=saprone
+            -Dsonar.projectKey=Saprone_Ingredient
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      - name: SonarCloud quality gate check
         id: sonarqube-quality-gate-check
         uses: sonarsource/sonarqube-quality-gate-action@master
         timeout-minutes: 5
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn clean verify sonar:sonar -DskipTests
 
       - name: SonarCloud quality gate status
         run: echo "The quality gate status is ${{ steps.sonarqube-quality-gate-check.outputs.quality-gate-status }}"
