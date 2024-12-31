@@ -1,8 +1,11 @@
 # Use a base image to build the application
-FROM maven:3.9.9-openjdk-21 AS builder
+FROM openjdk:21-jdk-slim AS builder
 
 # Set the working directory in the container
 WORKDIR /app
+
+# Install Maven
+RUN apt-get update && apt-get install -y maven
 
 # Copy the Maven build files
 COPY pom.xml ./
