@@ -1,5 +1,5 @@
 # Use a base image to build the application
-FROM openjdk:21-jdk-slim AS builder
+FROM maven:3.9.9-openjdk-21 AS builder
 
 # Set the working directory in the container
 WORKDIR /app
