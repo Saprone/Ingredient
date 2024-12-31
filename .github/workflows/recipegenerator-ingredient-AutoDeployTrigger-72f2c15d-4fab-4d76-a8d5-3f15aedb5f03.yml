@@ -46,6 +46,7 @@ jobs:
           args: >
             -Dsonar.organization=saprone
             -Dsonar.projectKey=Saprone_Ingredient
+            -Dsonar.java.binaries=target/classes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
