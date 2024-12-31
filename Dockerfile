@@ -10,20 +10,26 @@ COPY pom.xml ./
 # Copy the source code
 COPY src ./src
 
-# Install Maven
-RUN apt-get update && apt-get install -y maven
-
 # Build the application
 RUN mvn clean package -DskipTests
 
 # Use a new image to run the application
 FROM openjdk:21-jdk-slim
 
+# Create a non-root user to run the application
+RUN addgroup --system appgroup && adduser --system --ingroup appgroup appuser
+
 # Set the working directory in the container
 WORKDIR /app
 
 # Copy the built JAR file from the builder stage
 COPY --from=builder /app/target/*.jar ingredient.jar
+
+# Change ownership of the JAR file
+RUN chown appuser:appgroup ingredient.jar
+
+# Switch to the non-root user
+USER appuser
 
 # Expose the application port
 EXPOSE 8082
