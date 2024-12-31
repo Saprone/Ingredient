@@ -36,7 +36,10 @@ jobs:
       - name: Run integration tests with Maven
         run: mvn -Dskip.ut=true verify
 
-      - name: Run SonarCloud analysis
+      - name: Compile code with Maven
+        run: mvn package -DskipTests
+
+      - name: Run SonarCloud code analysis
         uses: sonarsource/sonarqube-scan-action@master
         with:
           projectBaseDir: .
